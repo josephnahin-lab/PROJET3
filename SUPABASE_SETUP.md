@@ -1,4 +1,4 @@
-# Configuration Supabase d’Ordolio
+# Configuration Supabase d’YNNOVIX
 
 ## 1. Projet et base de données
 

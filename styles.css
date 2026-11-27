@@ -40,4 +40,10 @@
 .payout-panel{grid-column:1/-1}.access-main:not(.account-main) .role-card-grid{grid-template-columns:repeat(3,1fr)}.access-main:not(.account-main) .role-card{min-height:275px}.client-services-intro{scroll-margin-top:95px}
 @media(max-width:700px){.access-main:not(.account-main) .role-card-grid{grid-template-columns:1fr}.access-main:not(.account-main) .role-card{min-height:225px}}
 .invite-form{grid-template-columns:repeat(4,minmax(0,1fr)) auto}.doctor-create-form{grid-template-columns:repeat(4,minmax(0,1fr)) auto}.payout-panel{grid-column:1/-1}
+
+/* Les formulaires professionnels s’adaptent aux coordonnées et au rôle. */
+.invite-form,.doctor-create-form{grid-template-columns:repeat(3,minmax(0,1fr))}
+.invite-form .primary-button,.doctor-create-form .primary-button{grid-column:1/-1;width:100%;justify-content:center}
+@media(max-width:850px){.invite-form,.doctor-create-form{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.invite-form,.doctor-create-form{grid-template-columns:1fr}.invite-form .primary-button,.doctor-create-form .primary-button{grid-column:1}}
 @media(max-width:980px){.doctor-create-form{grid-template-columns:1fr 1fr}.invite-form{grid-template-columns:1fr 1fr}}@media(max-width:600px){.doctor-create-form,.invite-form{grid-template-columns:1fr}}

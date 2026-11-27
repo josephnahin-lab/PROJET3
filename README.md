@@ -1,6 +1,6 @@
-# Ordolio — site de suivi des ordonnances
+# YNNOVIX — site de suivi des ordonnances
 
-Ordolio est un site web en français avec une page d’accueil, un choix d’espace, des pages séparées pour les professionnels de santé et l’administration, et un espace client standard.
+YNNOVIX est un site web en français avec une page d’accueil, un choix d’espace, des pages séparées pour les professionnels de santé et l’administration, et un espace client standard.
 
 **Le projet démarre sans médecin, sans compte et sans ordonnance préchargés.** Les personnes qui utiliseront le site saisissent elles-mêmes leurs informations.
 
@@ -8,35 +8,36 @@ Ordolio est un site web en français avec une page d’accueil, un choix d’esp
 
 1. Ouvrez `index.html` pour découvrir le site.
 2. Cliquez sur « Accéder à mon espace » pour ouvrir `acces.html`.
-3. Choisissez `medecin.html` ou `administrateur.html`.
-4. En démonstration, l’administrateur ajoute les profils dans **Gestion de l’équipe**. Le médecin choisit un profil existant ou crée le sien avant son premier envoi.
-5. Les médecins, infirmiers et sages-femmes disposent du parcours professionnel. L’administrateur choisit leur profession lors de la saisie d’un compte.
-6. Le grand public ouvre `compte-standard.html` pour créer ou retrouver un profil local, puis utilise `espace-standard.html` pour consulter le catalogue, demander un rendez-vous, commander ou contacter l’équipe.
-7. `gestion-catalogue.html` permet à l’administrateur d’ajouter et publier des produits, puis de traiter les demandes de commande, de rendez-vous et de renseignements.
-8. Avec Supabase, l’administrateur invite les comptes professionnels et chaque personne se connecte avec son compte. Le raccordement des nouveaux rôles (infirmier, sage-femme, compte standard), du catalogue, des demandes et des paiements doit être ajouté au back-end.
+3. Choisissez un espace dans `acces.html` : administrateur, médecin, infirmier, sage-femme, pharmacie ou client/standard. Chaque espace propose la connexion ou la création de compte selon le rôle.
+4. En démonstration, les professionnels créent leur profil depuis leur espace; l’administrateur peut aussi ajouter les professionnels et leurs coordonnées dans **Gestion de l’équipe**.
+5. Depuis `compte-standard.html`, le client crée ou retrouve son profil local. `espace-standard.html` rassemble le catalogue, les demandes de commande, les rendez-vous, les conseils généraux, les informations et le contact d’un professionnel.
+6. `gestion-catalogue.html` permet à l’administrateur d’ajouter des produits et leurs images, puis de suivre les demandes de commande, de rendez-vous et de renseignements.
+7. Les espaces médecin, infirmier, sage-femme et pharmacie permettent de transmettre une photo d’ordonnance. L’administrateur examine les envois, valide ou refuse avec un motif, puis suit les historiques et les comptes.
+8. Avec Supabase, le parcours actuel est prévu pour l’administration et le médecin. Le raccordement des autres rôles, des services clients, des paiements et de la comptabilité partagée reste à développer côté back-end.
 
-La page d’accueil reprend des codes de présentation observés sur cefonaf.com : bandeau d’information, navigation par rubriques, appels à l’action, sections de présentation, repères chiffrés, FAQ, pied de page organisé et aide flottante. Ils ont été réinterprétés pour le suivi des ordonnances; les rubriques commerciales et de conseil santé du site de référence ne sont pas reprises. L’accueil comporte aussi un symbole médical illustré en SVG, des animations discrètes, une transition entre les pages et une aide d’orientation. Les animations se désactivent lorsque le navigateur préfère la réduction des mouvements.
+L’espace client reprend une organisation de services inspirée de cefonaf.com : accès aux produits, informations et conseils, contact et inscription. Il est adapté à YNNOVIX et ne reprend pas les affirmations médicales ni les services financiers du site de référence. L’accueil utilise un bandeau d’information, une navigation par rubriques, des appels à l’action, des sections de présentation, des repères chiffrés, une FAQ, un pied de page organisé et une aide flottante. Il comporte aussi un symbole médical illustré en SVG, des animations discrètes et des transitions; les animations se désactivent si le navigateur demande une réduction des mouvements.
 
 ## Espaces
 
 ### Administrateur
 
 - Vue d’ensemble qui reste vide tant qu’aucun envoi n’a été saisi.
-- Annuaire de médecins avec invitation/création de profil, recherche et suspension/réactivation.
+- Annuaire des professionnels (médecins, infirmiers, sages-femmes et pharmacie) avec création de profil, recherche, coordonnées et suspension/réactivation.
 - Soumissions avec recherche, filtres de statut et de dates, pagination et export CSV.
 - Examen des images, validation ou refus avec motif destiné au médecin.
 - Notifications des nouveaux envois et des décisions.
-- Estimation des rémunérations : 200 FCFA par ordonnance validée, total par professionnel et montant à régler.
+- Suivi local des rémunérations : 200 FCFA par ordonnance validée, gains du jour, historique quotidien, paiements enregistrés par l’administrateur (montant, moyen et référence), solde à régler par professionnel et indicateurs mensuels.
+- Fiche détaillée par professionnel, historique imprimable/enregistrable en PDF et préparation d’un e-mail de partage.
 - Accès à la gestion du catalogue, des commandes et des rendez-vous.
 
-### Médecin
+### Espaces professionnels
 
-- Création ou sélection du profil médecin.
+- Un parcours séparé pour le médecin, l’infirmier, la sage-femme et la pharmacie; création ou sélection du profil correspondant.
 - Envoi JPEG, PNG ou HEIC jusqu’à 10 Mo, aperçu et retrait avant envoi.
 - Note facultative avec compteur et rappel de confidentialité.
 - Historique avec filtres par dates et statut, pagination et motifs de refus.
 - Notifications de décision.
-- Solde estimé d’après les validations, avec le gain du jour et l’historique quotidien.
+- Solde estimé à 200 FCFA par validation, avec gains du jour, paiements enregistrés, historique quotidien, contacts saisis par le professionnel, export imprimable/PDF et préparation d’un e-mail.
 
 ### Compte standard
 
@@ -44,10 +45,11 @@ La page d’accueil reprend des codes de présentation observés sur cefonaf.com
 - Consultation du catalogue publié par l’administrateur et demandes de commande.
 - Demande de rendez-vous et suivi du statut.
 - Envoi de renseignements et lecture d’informations générales de service.
+- Conseils et informations générales d’orientation, sans diagnostic ni prescription automatisés.
 
 ## Mode local et mode Supabase
 
-Le mode local commence avec des tableaux vides. Les profils, produits et demandes sont ajoutés par les utilisateurs et mémorisés dans le navigateur, sur cet appareil. Les photos ne sont pas conservées ou partagées entre les pages en mode local. Le solde affiche uniquement une estimation à verser selon les ordonnances validées; aucun paiement n’est initié ou enregistré. Les formulaires client sont des demandes à confirmer : aucun paiement en ligne, stock synchronisé ou rendez-vous confirmé n’est fourni. Utilisez des données fictives; ne saisissez pas d’informations réelles de patient.
+Le mode local commence avec des tableaux vides : aucun professionnel, client, produit, paiement, historique, commande ou rendez-vous n’est préchargé. Les profils, produits et demandes sont ajoutés par les utilisateurs et mémorisés dans le navigateur. Les photos de prescription ne sont pas partagées entre les pages en mode local. Le solde est calculé selon les validations; l’administrateur peut inscrire un paiement dans le registre local, mais aucun transfert d’argent n’est réalisé. Les formulaires client sont des demandes à confirmer : aucun paiement en ligne, stock synchronisé ou rendez-vous confirmé n’est fourni. Utilisez uniquement des données fictives; ne saisissez aucune donnée médicale ou coordonnée réelle dans cette démonstration.
 
 Pour les comptes réels, les invitations, le partage des photos et la synchronisation entre appareils, suivez `SUPABASE_SETUP.md`, configurez `supabase-config.js` et hébergez le site en HTTPS ou sur `localhost`.
 
@@ -69,4 +71,4 @@ Pour les comptes réels, les invitations, le partage des photos et la synchronis
 
 ## Sécurité et conservation
 
-Le prototype n’est pas certifié pour traiter des ordonnances réelles. Le schéma prépare des règles d’accès, un horodatage de décision et un stockage privé, mais aucune purge automatique des images n’est configurée. Le tarif de 200 FCFA est un paramètre de démonstration; aucun versement n’est effectué ni suivi comme payé. Faites valider le cadre de rémunération des professionnels, l’hébergement, les politiques d’accès, l’authentification, les moyens de paiement et les durées de conservation avant tout usage réel. Évitez toute rémunération qui pourrait influencer une décision clinique ou le choix d’un médicament.
+Le prototype n’est pas certifié pour traiter des ordonnances réelles. Les paiements sont seulement consignés dans le navigateur local et ne sont ni vérifiés ni transférés. Le schéma Supabase prépare certaines règles d’accès, un horodatage de décision et un stockage privé, mais l’application complète des rôles, la synchronisation financière et la purge automatique des images restent à concevoir. Faites valider le cadre de rémunération des professionnels, l’hébergement, les politiques d’accès, l’authentification, les moyens de paiement et les durées de conservation avant tout usage réel. Toute rémunération doit être encadrée pour ne jamais influencer une décision clinique ni le choix d’un médicament.

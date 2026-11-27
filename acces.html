@@ -4,24 +4,27 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#f4f8f6" />
-  <title>Ordolio — Choisir mon espace</title>
+  <title>YNNOVIX — Choisir mon espace</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="access-page page-enter">
-  <header class="site-header access-header"><a class="site-brand" href="index.html"><span class="brand-mark">o</span><span>ordolio<span class="brand-dot">.</span></span></a><div class="access-header-actions"><a class="quiet-link" href="connexion.html">Connexion</a><a class="quiet-link" href="index.html" data-transition><span>←</span> Accueil</a></div></header>
+  <header class="site-header access-header"><a class="site-brand" href="index.html"><span class="brand-mark">y</span><span>YNNOVIX<span class="brand-dot">.</span></span></a><div class="access-header-actions"><a class="quiet-link" href="connexion.html">Connexion</a><a class="quiet-link" href="index.html" data-transition><span>←</span> Accueil</a></div></header>
   <main class="access-main">
-    <div class="access-intro reveal"><span class="eyebrow-pill"><i></i> VOTRE ESPACE ORDOLIO</span><h1>Comment souhaitez-vous<br /><em>accéder à la plateforme&nbsp;?</em></h1><p>Choisissez votre rôle pour ouvrir la page correspondante.</p></div>
+    <div class="access-intro reveal"><span class="eyebrow-pill"><i></i> VOTRE ESPACE YNNOVIX</span><h1>Comment souhaitez-vous<br /><em>accéder à la plateforme&nbsp;?</em></h1><p>Choisissez votre rôle pour ouvrir la page correspondante.</p></div>
     <div class="role-card-grid">
-      <a class="role-card doctor-card reveal" href="medecin.html" data-transition><span class="role-card-icon">＋</span><span class="role-card-kicker">ESPACE PROFESSIONNEL</span><h2>Professionnel de santé</h2><p>Médecin, infirmier ou sage-femme : transmettre des ordonnances et suivre les validations et rémunérations.</p><span class="role-card-action">Ouvrir l’espace professionnel <b>→</b></span><span class="role-card-deco"></span></a>
-      <a class="role-card admin-card reveal" href="administrateur.html" data-transition><span class="role-card-icon">▤</span><span class="role-card-kicker">ESPACE DE GESTION</span><h2>Je suis administrateur</h2><p>Examiner les soumissions, gérer les comptes médecins et suivre l’activité.</p><span class="role-card-action">Ouvrir l’espace administrateur <b>→</b></span><span class="role-card-deco"></span></a>
-      <a class="role-card standard-card reveal" href="espace-standard.html" data-transition><span class="role-card-icon">⌂</span><span class="role-card-kicker">ESPACE CLIENT</span><h2>Compte standard</h2><p>Consulter le catalogue, demander un rendez-vous, acheter des produits disponibles ou poser une question.</p><span class="role-card-action">Découvrir les services <b>→</b></span><span class="role-card-deco"></span></a>
+      <a class="role-card doctor-card reveal" href="auth-entree.html?espace=medecin"><span class="role-card-icon">＋</span><span class="role-card-kicker">ESPACE PROFESSIONNEL</span><h2>Médecin</h2><p>Envoyer les ordonnances, suivre les validations et consulter le solde.</p><span class="role-card-action">Continuer <b>→</b></span><span class="role-card-deco"></span></a>
+      <a class="role-card doctor-card reveal" href="auth-entree.html?espace=infirmier"><span class="role-card-icon">✚</span><span class="role-card-kicker">ESPACE PROFESSIONNEL</span><h2>Infirmier / infirmière</h2><p>Transmettre les ordonnances et retrouver les décisions et l’historique.</p><span class="role-card-action">Continuer <b>→</b></span><span class="role-card-deco"></span></a>
+      <a class="role-card doctor-card reveal" href="auth-entree.html?espace=sage-femme"><span class="role-card-icon">✚</span><span class="role-card-kicker">ESPACE PROFESSIONNEL</span><h2>Sage-femme</h2><p>Envoyer les ordonnances, consulter le suivi et les rémunérations.</p><span class="role-card-action">Continuer <b>→</b></span><span class="role-card-deco"></span></a>
+      <a class="role-card doctor-card reveal" href="auth-entree.html?espace=pharmacie"><span class="role-card-icon">◈</span><span class="role-card-kicker">ESPACE PROFESSIONNEL</span><h2>Pharmacie</h2><p>Transmettre une ordonnance, suivre les validations et gérer les échanges liés aux demandes.</p><span class="role-card-action">Continuer <b>→</b></span><span class="role-card-deco"></span></a>
+      <a class="role-card admin-card reveal" href="auth-entree.html?espace=administrateur"><span class="role-card-icon">▤</span><span class="role-card-kicker">ESPACE DE GESTION</span><h2>Administrateur</h2><p>Consulter les soumissions, gérer les espaces et suivre les règlements.</p><span class="role-card-action">Continuer <b>→</b></span><span class="role-card-deco"></span></a>
+      <a class="role-card standard-card reveal" href="auth-entree.html?espace=client"><span class="role-card-icon">⌂</span><span class="role-card-kicker">ESPACE CLIENT</span><h2>Compte standard</h2><p>Consulter le catalogue, commander, demander un rendez-vous ou contacter un professionnel.</p><span class="role-card-action">Continuer <b>→</b></span><span class="role-card-deco"></span></a>
     </div>
     <p class="access-note reveal"><span>◈</span> Les comptes standard sont créés par l’utilisateur. Les espaces professionnels et administrateur restent distincts et seront protégés par les rôles du back-end.</p>
   </main>
-  <footer class="site-footer access-footer"><a class="site-brand" href="index.html"><span class="brand-mark">o</span><span>ordolio<span class="brand-dot">.</span></span></a><span>Prototype de démonstration · Ne pas saisir de données réelles de patient.</span></footer>
+  <footer class="site-footer access-footer"><a class="site-brand" href="index.html"><span class="brand-mark">y</span><span>YNNOVIX<span class="brand-dot">.</span></span></a><span>Prototype de démonstration · Ne pas saisir de données réelles de patient.</span></footer>
   <script src="site.js"></script>
 </body>
 </html>

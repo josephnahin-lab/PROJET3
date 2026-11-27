@@ -94,8 +94,8 @@ begin
 end;
 $$;
 
-drop trigger if exists ordolio_create_profile on auth.users;
-create trigger ordolio_create_profile
+drop trigger if exists YNNOVIX_create_profile on auth.users;
+create trigger YNNOVIX_create_profile
   after insert on auth.users
   for each row execute function public.create_doctor_profile();
 

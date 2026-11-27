@@ -274,7 +274,7 @@ if (window.ORDOLIO_SUPABASE&&(window.ORDOLIO_SUPABASE.url||window.ORDOLIO_SUPABA
     ])].map(row=>row.map(quote).join(';')).join('\r\n');
     const link=document.createElement('a');
     link.href=URL.createObjectURL(new Blob(['\ufeff',csv],{type:'text/csv;charset=utf-8'}));
-    link.download='ordolio-envois.csv';link.click();URL.revokeObjectURL(link.href);
+    link.download='YNNOVIX-envois.csv';link.click();URL.revokeObjectURL(link.href);
   }
 
   function renderHistory(){
@@ -404,7 +404,7 @@ if (window.ORDOLIO_SUPABASE&&(window.ORDOLIO_SUPABASE.url||window.ORDOLIO_SUPABA
     profile=null;
     const {data:userProfile,error}=await client.from('profiles').select('id,full_name,email,place,role,is_active').eq('id',session.user.id).single();
     if(error)throw error;
-    if(!userProfile||!['admin','doctor'].includes(userProfile.role))throw new Error('Profil Ordolio introuvable ou rôle non autorisé. Vérifiez le déclencheur et le profil dans Supabase.');
+    if(!userProfile||!['admin','doctor'].includes(userProfile.role))throw new Error('Profil YNNOVIX introuvable ou rôle non autorisé. Vérifiez le déclencheur et le profil dans Supabase.');
     if(userProfile.is_active===false){await client.auth.signOut();throw new Error('Ce compte a été suspendu. Contactez l’administrateur de votre espace.');}
     const requestedRole=document.body.dataset.role;
     if(requestedRole&&requestedRole!==userProfile.role){
@@ -415,7 +415,7 @@ if (window.ORDOLIO_SUPABASE&&(window.ORDOLIO_SUPABASE.url||window.ORDOLIO_SUPABA
     showApp();
     await refreshData();
     if(channel)await client.removeChannel(channel);
-    channel=client.channel(`ordolio-submissions-${profile.id}`)
+    channel=client.channel(`YNNOVIX-submissions-${profile.id}`)
       .on('postgres_changes',{event:'*',schema:'public',table:'submissions'},()=>{
         refreshData().catch(showError);
       })
