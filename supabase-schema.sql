@@ -12,6 +12,7 @@ create table if not exists public.submissions (
   id uuid primary key default gen_random_uuid(),
   doctor_id uuid not null references public.profiles(id) on delete cascade,
   created_at timestamptz not null default now(),
+  reviewed_at timestamptz,
   status text not null default 'pending' check (status in ('pending', 'approved', 'rejected')),
   note text check (note is null or char_length(note) <= 1000),
   review_note text check (review_note is null or char_length(review_note) <= 1000),
@@ -23,6 +24,7 @@ create table if not exists public.submissions (
 alter table public.profiles add column if not exists email text;
 alter table public.profiles add column if not exists is_active boolean not null default true;
 alter table public.submissions add column if not exists review_note text check (review_note is null or char_length(review_note) <= 1000);
+alter table public.submissions add column if not exists reviewed_at timestamptz;
 update public.profiles p set email = u.email from auth.users u where u.id = p.id and p.email is distinct from u.email;
 
 create table if not exists public.notifications (
@@ -145,6 +147,29 @@ begin
   return new;
 end;
 $$;
+
+create or replace function public.set_submission_reviewed_at()
+returns trigger
+language plpgsql
+set search_path = ''
+as $$
+begin
+  if new.status is distinct from old.status then
+    if new.status in ('approved', 'rejected') then
+      new.reviewed_at = now();
+    else
+      new.reviewed_at = null;
+    end if;
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists set_submission_reviewed_at on public.submissions;
+create trigger set_submission_reviewed_at
+  before update of status on public.submissions
+  for each row execute function public.set_submission_reviewed_at();
+
 revoke all on function public.notify_submission_event() from public, anon, authenticated;
 
 drop trigger if exists notify_submission_event on public.submissions;

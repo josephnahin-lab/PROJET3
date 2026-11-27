@@ -3,7 +3,7 @@
 ## 1. Projet et base de données
 
 1. Créez un projet Supabase.
-2. Dans le SQL Editor, exécutez `supabase-schema.sql`. Le script inclut les nouvelles colonnes et tables nécessaires pour les comptes actifs, les motifs de décision et les notifications. Il peut aussi ajouter ces éléments à une installation existante.
+2. Dans le SQL Editor, exécutez `supabase-schema.sql`. Le script inclut les colonnes pour les comptes actifs, les motifs de décision, les notifications et l’horodatage des décisions. Il peut aussi ajouter ces éléments à une installation existante.
 3. Dans `supabase-config.js`, renseignez l’URL du projet et la clé publique du navigateur (`anon`/publishable). N’y placez jamais une clé secrète ou `service_role`.
 4. Hébergez l’application en HTTPS (ou utilisez `localhost` en développement). Le SDK Supabase est chargé depuis jsDelivr.
 
@@ -17,7 +17,7 @@ set role = 'admin'
 where email = 'admin@example.com';
 ```
 
-Les nouvelles inscriptions publiques créent des profils médecin. L’administrateur pourra ensuite inviter les médecins depuis l’écran **Équipe**.
+Les espaces médecin et administrateur sont déjà prévus dans cette configuration. Les rôles infirmier et sage-femme, les comptes standard, le catalogue, les demandes de commande et de rendez-vous, ainsi que l’authentification client devront être ajoutés au schéma et aux règles d’accès avant leur synchronisation réelle. En mode front-end local, ces profils et demandes ne sont pas authentifiés.
 
 ## 3. Fonction sécurisée d’invitation
 
@@ -39,6 +39,9 @@ Définissez la valeur secrète uniquement dans les secrets du projet Supabase. N
 - Testez l’envoi d’une image, le refus avec motif, la notification reçue et la suspension/réactivation d’un compte.
 - Vérifiez qu’un médecin ne voit que ses soumissions et ses notifications, tandis que l’administrateur voit les données de l’équipe.
 - Testez les filtres de dates, les filtres de statut, la pagination et l’export CSV.
+- Avant d’afficher un solde réel, vérifiez la date de validation (`reviewed_at`) et le calcul du montant dû. Le front-end estime actuellement 200 FCFA par ordonnance validée; il n’enregistre ni paiement ni preuve de virement.
+- Ajoutez au back-end un registre de paiements immuable, les règles de rapprochement et les contrôles d’accès avant d’utiliser l’estimation comme solde officiel.
+- Configurez les produits, stocks, demandes client, rendez-vous et notifications côté serveur; les versions actuelles de ces fonctions ne sont stockées que dans le navigateur.
 
 ## Données de santé et conservation
 
@@ -50,4 +53,4 @@ Le prototype ne supprime pas automatiquement les photos après une durée défin
 
 ## Pages du site
 
-La page publique d’entrée est `index.html`. Le choix du rôle se fait dans `acces.html`; les espaces séparés sont `administrateur.html` et `medecin.html`. Avec Supabase activé, une personne connectée qui ouvre le mauvais espace est redirigée vers la page correspondant à son rôle. Ajoutez les URL de votre site aux URL de redirection autorisées de Supabase Auth.
+La page publique d’entrée est `index.html`. `acces.html` propose les trois parcours. Les espaces dédiés sont `administrateur.html`, `medecin.html` et `espace-standard.html`. `compte-standard.html` et `connexion.html` présentent les interfaces de compte. `gestion-catalogue.html` gère les produits et demandes en mode local. Avec Supabase activé, les pages professionnelles redirigent vers l’espace correspondant au rôle actuellement pris en charge. Ajoutez les URL de votre site aux URL de redirection autorisées de Supabase Auth.

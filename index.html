@@ -4,17 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#f4f8f6" />
-  <meta name="description" content="Ordolio facilite le suivi des ordonnances au sein des équipes médicales." />
-  <title>Ordolio — Le suivi médical, plus clair</title>
+  <meta name="description" content="Ordolio : un espace simple pour transmettre, examiner et suivre les ordonnances au sein d’une équipe médicale." />
+  <title>Ordolio — Une équipe, un suivi plus clair</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="marketing-page page-enter">
+  <div class="announcement-bar" role="status"><span class="announcement-pulse"></span><b>ORDOLIO · ESPACE DE SUIVI</b><span class="announcement-separator">—</span><span>Les données de démonstration commencent vierges. N’utilisez pas de données réelles de patients.</span><a href="#confidentialite">En savoir plus <span aria-hidden="true">→</span></a></div>
   <header class="site-header">
     <a class="site-brand" href="index.html" aria-label="Ordolio, accueil"><span class="brand-mark">o</span><span>ordolio<span class="brand-dot">.</span></span></a>
-    <nav class="site-nav" aria-label="Navigation principale"><a href="#fonctionnalites">Fonctionnalités</a><a href="#parcours">Comment ça marche</a></nav>
+    <nav class="site-nav" id="site-nav" aria-label="Navigation principale"><a href="#fonctionnalites">Fonctionnalités</a><a href="#parcours">Notre approche</a><a href="#services-client">Espace client</a><a href="#questions">Questions</a><a href="#apropos">À propos</a></nav>
+    <button class="mobile-nav-toggle" id="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu"><span></span><span></span></button>
     <a class="site-button site-button-small" href="acces.html" data-transition>Accéder à mon espace <span>→</span></a>
   </header>
   <main>
@@ -22,36 +24,51 @@
       <div class="hero-copy reveal">
         <span class="eyebrow-pill"><i></i> POUR LES ÉQUIPES MÉDICALES</span>
         <h1>Le soin est humain.<br /><em>Le suivi peut l’être aussi.</em></h1>
-        <p>Ordolio rassemble médecins et administrateurs autour d’un parcours simple pour transmettre, examiner et suivre les ordonnances.</p>
-        <div class="hero-actions"><a class="site-button" href="acces.html" data-transition>Accéder à mon espace <span>→</span></a><a class="quiet-link" href="#fonctionnalites">Découvrir la plateforme <span>↓</span></a></div>
-        <div class="hero-proof"><span class="proof-avatars"><b>AK</b><b>YM</b><b>FD</b></span><span>Un espace clair pour chaque rôle</span></div>
+        <p>Ordolio rassemble médecins et administrateurs dans un parcours clair pour transmettre, examiner et suivre les ordonnances.</p>
+        <div class="hero-actions"><a class="site-button" href="acces.html" data-transition>Choisir mon espace <span>→</span></a><a class="quiet-link" href="#fonctionnalites">Découvrir la plateforme <span>↓</span></a></div>
+        <div class="hero-proof"><span class="proof-symbol">✚</span><span>Deux espaces dédiés, un suivi coordonné</span></div>
       </div>
       <div class="hero-visual reveal" aria-label="Illustration des espaces médecin et administrateur">
         <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
         <div class="medical-emblem"><div class="emblem-glow"></div><svg viewBox="0 0 180 180" role="img" aria-label="Symbole médical abstrait"><path d="M90 18 145 39v41c0 37-22 64-55 82C57 144 35 117 35 80V39z" fill="url(#shieldFill)" stroke="#c6e5da" stroke-width="2"/><path d="M90 55v70M55 90h70" stroke="#147966" stroke-width="13" stroke-linecap="round"/><defs><linearGradient id="shieldFill" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#e4f4ed"/></linearGradient></defs></svg></div>
-        <div class="float-card doctor-float"><span class="float-icon float-mint">↥</span><span><b>Espace médecin</b><small>Envoi en quelques étapes</small></span><i class="float-check">✓</i></div>
-        <div class="float-card admin-float"><span class="float-icon float-lilac">✓</span><span><b>Suivi administratif</b><small>Statuts réunis au même endroit</small></span></div>
+        <div class="float-card doctor-float"><span class="float-icon float-mint">↥</span><span><b>Espace médecin</b><small>Envoi et historique</small></span><i class="float-check">✓</i></div>
+        <div class="float-card admin-float"><span class="float-icon float-lilac">✓</span><span><b>Espace administrateur</b><small>Examen et décisions</small></span></div>
         <div class="heartbeat"><svg viewBox="0 0 520 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 42h135l22-2 17-18 20 42 24-57 24 37h49l19-2 16-14 17 27 20-39 18 26h139"/></svg></div>
         <span class="visual-caption">Un parcours coordonné, en toute simplicité</span>
       </div>
     </section>
-    <section class="trust-strip reveal"><span>UNE PLATEFORME PENSÉE POUR LE QUOTIDIEN</span><div><b>Transmettre</b><i>·</i><b>Examiner</b><i>·</i><b>Suivre</b></div></section>
+
+    <section class="trust-strip reveal" aria-label="Les trois étapes du suivi"><span>UN PARCOURS LISIBLE AU QUOTIDIEN</span><div><b>Transmettre</b><i>·</i><b>Examiner</b><i>·</i><b>Suivre</b></div></section>
+
     <section class="features-section" id="fonctionnalites">
       <div class="section-intro reveal"><span class="eyebrow">CHAQUE RÔLE A SON ESPACE</span><h2>Moins de dispersion.<br /><em>Plus de visibilité.</em></h2><p>Les tâches essentielles sont regroupées dans des pages dédiées, faciles à parcourir sur ordinateur comme sur mobile.</p></div>
       <div class="feature-grid">
-        <article class="feature-card reveal"><span class="feature-number">01</span><span class="feature-icon">↥</span><h3>Envoi médecin</h3><p>Ajoutez une photo, vérifiez son aperçu et transmettez-la avec une note si besoin.</p></article>
-        <article class="feature-card reveal"><span class="feature-number">02</span><span class="feature-icon feature-icon-amber">◷</span><h3>Examen administrateur</h3><p>Retrouvez les soumissions, examinez le fichier et indiquez clairement la décision.</p></article>
-        <article class="feature-card reveal"><span class="feature-number">03</span><span class="feature-icon feature-icon-blue">▤</span><h3>Historique utile</h3><p>Filtrez par statut et période, puis parcourez les résultats page par page.</p></article>
-        <article class="feature-card reveal"><span class="feature-number">04</span><span class="feature-icon feature-icon-lilac">♧</span><h3>Notifications</h3><p>Repérez les nouveaux envois et retrouvez les décisions communiquées.</p></article>
+        <article class="feature-card reveal"><span class="feature-number">01</span><span class="feature-icon">↥</span><h3>Envoi médecin</h3><p>Ajoutez une image, vérifiez son aperçu et transmettez-la avec une note facultative.</p></article>
+        <article class="feature-card reveal"><span class="feature-number">02</span><span class="feature-icon feature-icon-amber">◷</span><h3>Examen administrateur</h3><p>Retrouvez les envois, consultez leur statut et expliquez chaque décision.</p></article>
+        <article class="feature-card reveal"><span class="feature-number">03</span><span class="feature-icon feature-icon-blue">▤</span><h3>Historique filtrable</h3><p>Parcourez les envois par période et par statut avec une pagination claire.</p></article>
+        <article class="feature-card reveal"><span class="feature-number">04</span><span class="feature-icon feature-icon-lilac">♧</span><h3>Notifications utiles</h3><p>Repérez les nouveaux envois et retrouvez les décisions communiquées.</p></article>
       </div>
     </section>
-    <section class="steps-section" id="parcours">
-      <div class="steps-copy reveal"><span class="eyebrow">UN PARCOURS LISIBLE</span><h2>De l’envoi<br />à la décision.</h2><p>Chaque personne rejoint son espace et retrouve les actions adaptées à son rôle.</p><a class="quiet-link" href="acces.html" data-transition>Choisir mon espace <span>→</span></a></div>
-      <div class="steps-list"><article class="step-item reveal"><span>1</span><div><h3>Choisir son espace</h3><p>Le médecin et l’administrateur ouvrent chacun leur page.</p></div></article><article class="step-item reveal"><span>2</span><div><h3>Transmettre ou examiner</h3><p>Le médecin envoie un fichier, l’administrateur le retrouve dans ses soumissions.</p></div></article><article class="step-item reveal"><span>3</span><div><h3>Suivre le résultat</h3><p>La décision et son commentaire apparaissent dans les notifications et l’historique.</p></div></article></div>
+
+    <section class="approach-section" id="parcours">
+      <div class="approach-heading reveal"><span class="eyebrow">L’ESSENTIEL, EN UN COUP D’ŒIL</span><h2>Une organisation simple<br /><em>pour toute l’équipe.</em></h2><p>Les indicateurs reflètent les données ajoutées par votre équipe. Aucun chiffre d’activité n’est préchargé.</p></div>
+      <div class="approach-stats"><article class="approach-stat reveal"><strong>02</strong><span>espaces distincts</span><small>Médecin · Administrateur</small></article><article class="approach-stat reveal"><strong>03</strong><span>étapes de suivi</span><small>Envoyer · Examiner · Décider</small></article><article class="approach-stat reveal"><strong>0</strong><span>donnée préremplie</span><small>À vous de commencer la saisie</small></article></div>
+      <div class="approach-note reveal"><span class="note-icon">✦</span><div><b>Chaque personne démarre avec ses propres informations.</b><p>Créez les profils et les premiers envois depuis les espaces dédiés, puis retrouvez leur évolution dans l’historique.</p></div><a class="quiet-link" href="acces.html" data-transition>Commencer <span>→</span></a></div>
     </section>
-    <section class="closing-section reveal"><div><span class="eyebrow">ORDOLIO</span><h2>Un espace adapté<br />à votre rôle.</h2></div><a class="site-button site-button-light" href="acces.html" data-transition>Choisir mon espace <span>→</span></a><div class="closing-orb"></div></section>
+
+    <section class="steps-section" id="apropos">
+      <div class="steps-copy reveal"><span class="eyebrow">NOTRE APPROCHE</span><h2>De l’envoi<br />à la décision.</h2><p>Ordolio est un outil de coordination conçu pour rendre le suivi plus lisible et éviter la dispersion des échanges.</p><a class="quiet-link" href="acces.html" data-transition>Choisir mon espace <span>→</span></a></div>
+      <div class="steps-list"><article class="step-item reveal"><span>1</span><div><h3>Choisir son espace</h3><p>Le médecin et l’administrateur ouvrent chacun une page dédiée.</p></div></article><article class="step-item reveal"><span>2</span><div><h3>Transmettre ou examiner</h3><p>Le médecin transmet un fichier, l’administrateur le consulte dans ses soumissions.</p></div></article><article class="step-item reveal"><span>3</span><div><h3>Suivre le résultat</h3><p>La décision et son commentaire apparaissent dans les notifications et l’historique.</p></div></article></div>
+    </section>
+
+    <section class="faq-section" id="questions"><div class="section-intro reveal"><span class="eyebrow">QUESTIONS PRATIQUES</span><h2>Avant de commencer.</h2><p>Quelques repères pour démarrer et comprendre les limites de la démonstration.</p></div><div class="faq-list"><details class="faq-item reveal"><summary>Comment accéder à mon espace ?<span>＋</span></summary><p>Cliquez sur « Accéder à mon espace », puis choisissez Médecin ou Administrateur. Chaque choix ouvre sa page dédiée.</p></details><details class="faq-item reveal"><summary>Les profils et les envois sont-ils déjà créés ?<span>＋</span></summary><p>Non. Le projet commence sans profil ni soumission préenregistrés. Vos utilisateurs saisissent les informations nécessaires.</p></details><details class="faq-item reveal"><summary>Les données sont-elles partagées entre appareils ?<span>＋</span></summary><p>En démonstration locale, les données restent dans le navigateur utilisé et les photos ne sont pas partagées entre les pages. Pour une synchronisation entre utilisateurs, configurez le mode Supabase.</p></details><details class="faq-item reveal" id="confidentialite"><summary>Peut-on utiliser de vraies ordonnances dès maintenant ?<span>＋</span></summary><p>Non. Ce prototype n’est pas validé pour des données médicales réelles. Faites vérifier la sécurité, l’hébergement, les accès et la durée de conservation avant tout usage réel.</p></details></div></section>
+
+    <section class="client-services-intro" id="services-client"><div class="section-intro reveal"><span class="eyebrow">AUSSI POUR LE GRAND PUBLIC</span><h2>Un besoin de santé ?<br /><em>Des services à portée de main.</em></h2><p>Le compte standard donnera accès au catalogue publié par l’équipe, aux demandes de rendez-vous et aux renseignements pratiques.</p></div><div class="service-grid"><article class="service-card reveal"><span class="feature-icon">◈</span><h3>Catalogue et commandes</h3><p>Consultez les produits ajoutés par l’établissement et envoyez une demande à confirmer.</p><a class="quiet-link" href="espace-standard.html">Parcourir le catalogue <span>→</span></a></article><article class="service-card reveal"><span class="feature-icon feature-icon-blue">◷</span><h3>Rendez-vous</h3><p>Proposez une date et laissez l’équipe vous confirmer le créneau.</p><a class="quiet-link" href="espace-standard.html#rendez-vous">Demander un rendez-vous <span>→</span></a></article><article class="service-card reveal"><span class="feature-icon feature-icon-amber">⌂</span><h3>Compte standard</h3><p>Créez un espace client pour retrouver les demandes faites dans ce navigateur.</p><a class="quiet-link" href="compte-standard.html">Créer mon compte <span>→</span></a></article></div></section>
+    <section class="closing-section reveal"><div><span class="eyebrow">ORDOLIO</span><h2>Un espace adapté<br />à votre rôle.</h2><p>Ouvrez la page qui correspond à votre mission.</p></div><a class="site-button site-button-light" href="acces.html" data-transition>Choisir mon espace <span>→</span></a><div class="closing-orb"></div></section>
   </main>
-  <footer class="site-footer"><a class="site-brand" href="index.html"><span class="brand-mark">o</span><span>ordolio<span class="brand-dot">.</span></span></a><span>Une plateforme de suivi pour les équipes médicales.</span><span>© 2026 Ordolio · Prototype de démonstration</span></footer>
+  <footer class="site-footer"><div class="footer-about"><a class="site-brand" href="index.html"><span class="brand-mark">o</span><span>ordolio<span class="brand-dot">.</span></span></a><span>Une plateforme de suivi pour les équipes médicales.</span></div><nav class="footer-nav" aria-label="Navigation de pied de page"><a href="#fonctionnalites">Fonctionnalités</a><a href="#questions">Questions</a><a href="acces.html" data-transition>Accéder à mon espace</a></nav><span class="footer-legal">© 2026 Ordolio · Prototype de démonstration</span></footer>
+
+  <div class="help-widget"><div class="help-panel" id="help-panel" hidden><div class="help-panel-head"><span class="help-online"></span><div><b>Aide d’orientation</b><small>Repères sur les espaces Ordolio</small></div><button id="help-close" type="button" aria-label="Fermer l’aide">×</button></div><p>Que souhaitez-vous faire ?</p><a href="acces.html" data-transition>Choisir mon espace <span>→</span></a><a href="#questions" id="help-faq-link">Comprendre la démonstration <span>→</span></a><small class="help-disclaimer">Cette aide oriente vers les pages du site. Elle ne fournit pas de conseil médical.</small></div><button class="help-toggle" id="help-toggle" type="button" aria-expanded="false" aria-controls="help-panel"><span class="help-toggle-icon">?</span><span>Aide</span></button></div>
   <script src="site.js"></script>
 </body>
 </html>

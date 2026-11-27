@@ -55,6 +55,7 @@ if (window.ORDOLIO_SUPABASE&&(window.ORDOLIO_SUPABASE.url||window.ORDOLIO_SUPABA
     $('admin-view').classList.toggle('hidden',!isAdmin);
     $('admin-bottom').classList.toggle('hidden',!isAdmin);
     $('doctor-view').classList.toggle('hidden',isAdmin);
+    $('doctor-profile-setup').classList.add('hidden');
     $('page-title').textContent=isAdmin?'Vue d’ensemble':`Bonjour, ${fullName(profile)}`;
     $('crumb').textContent=isAdmin?'Vue d’ensemble':'Mon espace';
     $('page-subtitle').textContent=isAdmin?'Données synchronisées de votre espace.':'Votre activité et les ordonnances de votre compte.';
@@ -73,13 +74,15 @@ if (window.ORDOLIO_SUPABASE&&(window.ORDOLIO_SUPABASE.url||window.ORDOLIO_SUPABA
 
   function renderNavigation(){
     const isAdmin=profile.role==='admin';
-    const items=isAdmin?[['▦','Vue d’ensemble'],['♙','Équipe'],['▤','Ordonnances'],['⌁','Statistiques']]:[['⌂','Mon espace'],['↑','Envoyer une ordonnance'],['▤','Historique']];
+    const items=isAdmin?[['▦','Vue d’ensemble'],['♙','Équipe'],['▤','Ordonnances'],['⌁','Statistiques'],['₣','Rémunérations'],['◈','Catalogue & demandes']]:[['⌂','Mon espace'],['↑','Envoyer une ordonnance'],['▤','Historique'],['₣','Mon solde'],['◈','Services']];
     $('navigation').innerHTML=items.map((item,index)=>`<button class="nav-item ${index===0?'active':''}" type="button" aria-label="${escapeHtml(item[1])}" data-label="${escapeHtml(item[1])}"><span class="nav-icon">${item[0]}</span><span>${escapeHtml(item[1])}</span></button>`).join('');
     $('navigation').querySelectorAll('.nav-item').forEach(button=>button.addEventListener('click',()=>{
       $('navigation').querySelectorAll('.nav-item').forEach(item=>item.classList.remove('active'));
       button.classList.add('active');
-      const destinations={'Vue d’ensemble':'.welcome-row','Mon espace':'.welcome-row','Statistiques':'.chart-panel','Ordonnances':'.table-panel','Historique':'.history-panel'};
-      if(button.dataset.label==='Envoyer une ordonnance')$('file-input').click();
+      const destinations={'Vue d’ensemble':'.welcome-row','Mon espace':'.welcome-row','Statistiques':'.chart-panel','Ordonnances':'.table-panel','Historique':'.history-panel','Mon solde':'#professional-earnings','Rémunérations':'#admin-payouts'};
+      if(button.dataset.label==='Catalogue & demandes')window.location.href='gestion-catalogue.html';
+      else if(button.dataset.label==='Services')window.location.href='espace-standard.html';
+      else if(button.dataset.label==='Envoyer une ordonnance')$('file-input').click();
       else if(button.dataset.label==='Équipe'){
         $('team-section').classList.remove('hidden');
         document.querySelectorAll('#admin-view,#admin-bottom').forEach(element=>element.classList.add('hidden'));
@@ -126,6 +129,29 @@ if (window.ORDOLIO_SUPABASE&&(window.ORDOLIO_SUPABASE.url||window.ORDOLIO_SUPABA
     $('stats').innerHTML=cards.map(card=>`<article class="stat-card"><div class="stat-top"><span class="stat-label">${escapeHtml(card[0])}</span><span class="stat-icon">${card[3]}</span></div><div class="stat-number">${escapeHtml(card[1])}</div><div class="stat-bottom">${escapeHtml(card[2])}</div></article>`).join('');
   }
 
+  function renderEarnings(){
+    const rate=200;
+    const when=item=>new Date(item.reviewed_at||item.created_at);
+    const money=value=>`${new Intl.NumberFormat('fr-FR').format(value)} FCFA`;
+    const approved=submissions.filter(item=>item.status==='approved');
+    const today=new Date();
+    if(profile.role==='admin'){
+      let panel=$('admin-payouts');
+      if(!panel){panel=document.createElement('article');panel.id='admin-payouts';panel.className='panel payout-panel';panel.innerHTML='<div class="panel-heading"><div><span class="eyebrow">SUIVI DES VERSEMENTS</span><h2>Estimations par professionnel</h2><p>200 FCFA par ordonnance validée</p></div><span class="summary-icon">₣</span></div><div class="payout-total" id="payout-total"></div><div class="payout-table-wrap"><table><thead><tr><th>Professionnel</th><th>Validées</th><th>Estimation</th></tr></thead><tbody id="payout-rows"></tbody></table></div><p class="earnings-note">Montants calculés depuis les validations, sans preuve de paiement. Le suivi des virements sera raccordé au back-end; vérifiez aussi le cadre de rémunération applicable.</p>';document.querySelector('#admin-bottom')?.appendChild(panel);}
+      const groups=new Map();approved.forEach(item=>{const person=item.profiles||{},id=item.doctor_id;const row=groups.get(id)||{name:fullName(person),count:0};row.count++;groups.set(id,row)});
+      const approvedToday=approved.filter(item=>when(item).toDateString()===today.toDateString()).length;
+      $('payout-total').textContent=`${money(approved.length*rate)} cumul estimé · aujourd’hui ${money(approvedToday*rate)} · virements non déduits`;
+      $('payout-rows').innerHTML=groups.size?[...groups.values()].sort((a,b)=>b.count-a.count).map(row=>`<tr><td>${escapeHtml(row.name)}</td><td>${row.count}</td><td>${money(row.count*rate)}</td></tr>`).join(''):'<tr><td colspan="3" class="empty-state">Aucune ordonnance validée à rémunérer.</td></tr>';
+      return;
+    }
+    const own=approved.filter(item=>item.doctor_id===profile.id);
+    const earnedToday=own.filter(item=>when(item).toDateString()===today.toDateString()).length*rate;
+    const byDay=own.reduce((groups,item)=>{const key=when(item).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});(groups[key]??=[]).push(item);return groups},{});
+    let panel=$('professional-earnings');
+    if(!panel){panel=document.createElement('article');panel.id='professional-earnings';panel.className='panel earnings-panel';document.querySelector('.doctor-side')?.insertBefore(panel,document.querySelector('.history-panel'));}
+    panel.innerHTML=`<div class="panel-heading"><div><span class="eyebrow">RÉMUNÉRATION</span><h2>Mon solde estimé</h2><p>${money(rate)} par ordonnance validée</p></div><span class="summary-icon">₣</span></div><div class="earnings-total">${money(own.length*rate)}</div><div class="earnings-caption">À verser · ${own.length} ordonnance${own.length===1?'':'s'} validée${own.length===1?'':'s'}</div><div class="earnings-today"><span>Gain validé aujourd’hui</span><b>${money(earnedToday)}</b></div><div class="earnings-list">${Object.entries(byDay).length?Object.entries(byDay).sort((a,b)=>when(b[1][0])-when(a[1][0])).slice(0,5).map(([day,items])=>`<div><span>${escapeHtml(day)}</span><b>+ ${money(items.length*rate)}</b></div>`).join(''):'<p class="empty-state">Les gains apparaîtront après la validation de vos premiers envois.</p>'}</div><p class="earnings-note">Estimation de démonstration. Vérifiez le cadre de rémunération applicable et veillez à ce qu’il ne guide pas le choix clinique.</p>`;
+  }
+
   function renderChart(){
     const now=new Date();
     const days=Math.max(1,now.getDate());
@@ -152,10 +178,11 @@ if (window.ORDOLIO_SUPABASE&&(window.ORDOLIO_SUPABASE.url||window.ORDOLIO_SUPABA
   function renderRanking(){
     const counts=new Map();
     monthItems().filter(item=>item.status==='approved').forEach(item=>counts.set(item.doctor_id,(counts.get(item.doctor_id)||0)+1));
-    const ranked=doctors.map(doctor=>({...doctor,count:counts.get(doctor.id)||0})).sort((a,b)=>b.count-a.count).slice(0,5);
+    const ranked=doctors.map(doctor=>({...doctor,count:counts.get(doctor.id)||0})).sort((a,b)=>fullName(a).localeCompare(fullName(b),'fr'));
+    document.querySelector('.ranking-panel h2').textContent='Suivi des validations';document.querySelector('.ranking-panel .panel-heading p').textContent='Comptage utile aux rémunérations';
     $('ranking').innerHTML=ranked.length?ranked.map((doctor,index)=>{
       const [background,ink]=colors[index%colors.length].split('|');
-      return `<div class="rank-row"><span class="rank-num">${String(index+1).padStart(2,'0')}</span><span class="rank-avatar" style="background:${background};color:${ink}">${escapeHtml(initials(fullName(doctor)))}</span><span><span class="rank-name">${escapeHtml(fullName(doctor))}</span><span class="rank-sub">${escapeHtml(doctor.place||'')}</span></span><span class="rank-value">${doctor.count}<small>ordonnances</small></span></div>`;
+      return `<div class="rank-row"><span class="rank-num">✓</span><span class="rank-avatar" style="background:${background};color:${ink}">${escapeHtml(initials(fullName(doctor)))}</span><span><span class="rank-name">${escapeHtml(fullName(doctor))}</span><span class="rank-sub">${escapeHtml(doctor.place||'Professionnel de santé')}</span></span><span class="rank-value">${doctor.count}<small>validées</small></span></div>`;
     }).join(''):'<p class="empty-state">Aucun médecin inscrit.</p>';
   }
 
@@ -287,6 +314,7 @@ if (window.ORDOLIO_SUPABASE&&(window.ORDOLIO_SUPABASE.url||window.ORDOLIO_SUPABA
 
   function renderAll(){
     renderStats();
+    renderEarnings();
     renderRows();
     renderHistory();
     if(profile.role==='admin'){
@@ -298,7 +326,7 @@ if (window.ORDOLIO_SUPABASE&&(window.ORDOLIO_SUPABASE.url||window.ORDOLIO_SUPABA
 
   async function refreshData(){
     const {data:records,error:recordsError}=await client.from('submissions')
-      .select('id,doctor_id,created_at,status,note,review_note,file_path,profiles!submissions_doctor_id_fkey(id,full_name,place)')
+      .select('id,doctor_id,created_at,reviewed_at,status,note,review_note,file_path,profiles!submissions_doctor_id_fkey(id,full_name,place)')
       .order('created_at',{ascending:false});
     if(recordsError)throw recordsError;
     submissions=records||[];

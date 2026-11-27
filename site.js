@@ -26,4 +26,45 @@
       window.setTimeout(() => { window.location.href = target.href; }, 260);
     });
   });
+
+  const helpPanel = document.getElementById('help-panel');
+  const helpToggle = document.getElementById('help-toggle');
+  const helpClose = document.getElementById('help-close');
+  const closeHelp = () => {
+    if (!helpPanel || !helpToggle) return;
+    helpPanel.hidden = true;
+    helpToggle.setAttribute('aria-expanded', 'false');
+  };
+  if (helpPanel && helpToggle) {
+    helpToggle.addEventListener('click', () => {
+      const isOpening = helpPanel.hidden;
+      helpPanel.hidden = !isOpening;
+      helpToggle.setAttribute('aria-expanded', String(isOpening));
+    });
+    helpClose?.addEventListener('click', closeHelp);
+    document.getElementById('help-faq-link')?.addEventListener('click', closeHelp);
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeHelp();
+    });
+  }
+
+  const menuToggle = document.getElementById('mobile-nav-toggle');
+  const siteNav = document.getElementById('site-nav') || document.getElementById('client-nav');
+  if (menuToggle && siteNav) {
+    const closeMenu = () => {
+      siteNav.classList.remove('is-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Ouvrir le menu');
+    };
+    menuToggle.addEventListener('click', () => {
+      const isOpening = !siteNav.classList.contains('is-open');
+      siteNav.classList.toggle('is-open', isOpening);
+      menuToggle.setAttribute('aria-expanded', String(isOpening));
+      menuToggle.setAttribute('aria-label', isOpening ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+    siteNav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeMenu();
+    });
+  }
 })();
